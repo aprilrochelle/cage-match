@@ -14,6 +14,14 @@ const buildDomString = (players) => {
     printToDom(domString, "player-holder");
 }
 
+const attachEventListener = () => {
+    
+}
+
+function executeIfFail() {
+    console.log('Something went wrong.');
+}
+
 const xhrCall = (userName, successFunction) => {
     let myRequest = new XMLHttpRequest();
     myRequest.addEventListener('load', successFunction);
@@ -21,3 +29,9 @@ const xhrCall = (userName, successFunction) => {
     myRequest.open("GET", `https://teamtreehouse.com/${username}.json`);
     myRequest.send();
 }
+
+const startApp = () => {
+    attachEventListener();
+}
+
+startApp();
