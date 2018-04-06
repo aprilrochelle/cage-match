@@ -13,3 +13,11 @@ const buildDomString = (players) => {
     });
     printToDom(domString, "player-holder");
 }
+
+const xhrCall = (userName, successFunction) => {
+    let myRequest = new XMLHttpRequest();
+    myRequest.addEventListener('load', successFunction);
+    myRequest.addEventListener('error', executeIfFail);
+    myRequest.open("GET", `https://teamtreehouse.com/${username}.json`);
+    myRequest.send();
+}
