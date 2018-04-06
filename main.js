@@ -15,6 +15,11 @@ const buildDomString = (players) => {
 }
 
 const attachEventListener = () => {
+    const matchBtn = document.getElementById('match-btn');
+    matchBtn.addEventListener('click', parsePlayerData);
+}
+
+const parsePlayerData = () => {
     
 }
 
