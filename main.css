@@ -1,0 +1,18 @@
+body {
+    background-color: rgb(101, 27, 0);
+    color: white;
+}
+
+.input-group {
+    margin: 0 auto 10px auto;
+}
+
+span,
+input {
+    display: inline;
+}
+
+.btn-warning {
+    display: block;
+    margin: 0 auto;
+}
