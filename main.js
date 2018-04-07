@@ -1,6 +1,3 @@
-let player1Name = '';
-let player2Name = '';
-
 const printToDom = (domString, divId) => {
     document.getElementById(divId).innerHTML = domString;
 }
@@ -23,15 +20,15 @@ const attachEventListener = () => {
 }
 
 const grabPlayerNames = () => {
-    player1Name = document.getElementById('player1').value;
-    player2Name = document.getElementById('player2').value;
+    const player1Name = document.getElementById('player1').value;
+    const player2Name = document.getElementById('player2').value;
     grabPlayerJson(player1Name, player2Name);
 }
 
 const grabPlayerJson = (player1, player2) => {
-    const player1Data = `"https://teamtreehouse.com/${player1}.json"`;
-    const player2Data = `"https://teamtreehouse.com/${player2}.json"`;
-    playerXhrCall(player1Data);
+    const player1Data = `https://teamtreehouse.com/${player1}.json`;
+    const player2Data = `https://teamtreehouse.com/${player2}.json`;
+    playerXhr(player1Data, player2Data);
 }
 
 function executeOnLoad() {
@@ -39,17 +36,34 @@ function executeOnLoad() {
     console.log(data1);
 }
 
+// function executeAfterPlayer1Load() {
+//     const data2 = JSON.parse(this.responseText);
+//     console.log(data2);
+// }
+
 function executeIfFail() {
     console.log('Something went wrong.');
 }
 
-const playerXhrCall = (playerData) => {
+const playerXhr = (playerData1, playerData2) => {
     let myRequest = new XMLHttpRequest();
-    myRequest.addEventListener('load', executeOnLoad);
+    myRequest.addEventListener('load', executeOnLoad); 
+    // {
+        // executeOnLoad();
+        // player2Xhr(playerData2);
+    // });
     myRequest.addEventListener('error', executeIfFail);
-    myRequest.open("GET", playerData);
+    myRequest.open("GET", `${playerData1}`);
     myRequest.send();
 }
+
+// const player2Xhr = (playerData2) => {
+//     let myOtherRequest = new XMLHttpRequest();
+//     myOtherRequest.addEventListener('load', executeAfterPlayer1Load);
+//     myOtherRequest.addEventListener('error', executeIfFail);
+//     myOtherRequest.open("GET", `${playerData2}`);
+//     myOtherRequest.send();
+// }
 
 const startApp = () => {
     attachEventListener();
