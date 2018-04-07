@@ -16,23 +16,45 @@ const buildDomString = (players) => {
 
 const attachEventListener = () => {
     const matchBtn = document.getElementById('match-btn');
-    matchBtn.addEventListener('click', parsePlayerData);
+    matchBtn.addEventListener('click', grabPlayerName);
 }
 
-const parsePlayerData = () => {
-    
+const grabPlayerName = () => {
+    const player1Name = document.getElementById('player1').value;
+    player1Xhr(player1Name);
 }
 
+function executeOnLoad() {
+    const data1 = JSON.parse(this.responseText);
+    player2Xhr(data1);
+    // playersArray.push(data1);
+}
 function executeIfFail() {
     console.log('Something went wrong.');
 }
 
-const xhrCall = (userName, successFunction) => {
+const player1Xhr = (player1) => {
     let myRequest = new XMLHttpRequest();
-    myRequest.addEventListener('load', successFunction);
+    myRequest.addEventListener('load', executeOnLoad);
     myRequest.addEventListener('error', executeIfFail);
-    myRequest.open("GET", `https://teamtreehouse.com/${username}.json`);
+    myRequest.open("GET", `https://teamtreehouse.com/${player1}.json`);
     myRequest.send();
+}
+
+const player2Xhr = (player1object) => {
+    const player2Name = document.getElementById('player2').value;
+    let playersArray = [];
+    let myOtherRequest = new XMLHttpRequest();
+    myOtherRequest.addEventListener('load', executeAfterPlayer1Load);
+    myOtherRequest.addEventListener('error', executeIfFail);
+    myOtherRequest.open("GET", `https://teamtreehouse.com/${player2Name}.json`);
+    myOtherRequest.send();
+
+        function executeAfterPlayer1Load() {
+            const data2 = JSON.parse(this.responseText);
+            playersArray.push(player1object, data2);
+            buildDomString(playersArray);
+        }
 }
 
 const startApp = () => {
