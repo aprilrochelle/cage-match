@@ -12,6 +12,31 @@ const buildDomString = (players) => {
         domString += `</div>`;
     });
     printToDom(domString, "player-holder");
+    getWinner(players);
+}
+
+const printWinner = (player) => {
+    let winnerBoxText = '';
+    let winnerBadges = '';
+    winnerBoxText += `<h2>${player.name} is the winner!</h2>`;
+    printToDom(winnerBoxText, "winner-box");
+    for (let i = 0; i < player.badges.length; i++) {
+        winnerBadges += `<div class="badge-card">`;
+        winnerBadges +=     `<h5>${player.badges[i].name}</h5>`;
+        winnerBadges +=     `<img src="${player.badges[i].icon_url}" class="badge-img">`;
+        winnerBadges += `</div>`;
+    }
+    printToDom(winnerBadges, "winner-badges");
+}
+
+const getWinner = (players) => {
+    let player1score = players[0].points.total;
+    let player2score = players[1].points.total;
+    if(player1score > player2score) {
+        printWinner(players[0]);
+    } else {
+        printWinner(players[1]);
+    }
 }
 
 const attachEventListener = () => {
@@ -27,8 +52,8 @@ const grabPlayerName = () => {
 function executeOnLoad() {
     const data1 = JSON.parse(this.responseText);
     player2Xhr(data1);
-    // playersArray.push(data1);
 }
+
 function executeIfFail() {
     console.log('Something went wrong.');
 }
