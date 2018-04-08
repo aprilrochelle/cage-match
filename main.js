@@ -18,12 +18,16 @@ const buildDomString = (players) => {
 const printWinner = (player) => {
     let winnerBoxText = '';
     let winnerBadges = '';
-    winnerBoxText += `<h2>${player.name} is the winner!</h2>`;
-    printToDom(winnerBoxText, "winner-box");
+    // winnerBoxText += `<div id="winner-box"`;
+    winnerBoxText +=    `<h2>${player.name} is the winner!</h2>`;
+    // winnerBoxText += `</div>`;
+    printToDom(winnerBoxText, "winner");
     for (let i = 0; i < player.badges.length; i++) {
-        winnerBadges += `<div class="badge-card">`;
-        winnerBadges +=     `<h5>${player.badges[i].name}</h5>`;
-        winnerBadges +=     `<img src="${player.badges[i].icon_url}" class="badge-img">`;
+        winnerBadges += `<div class="col-md-2">`;
+        winnerBadges +=     `<div class="badge-card"`;
+        winnerBadges +=         `<h5>${player.badges[i].name}</h5>`;
+        winnerBadges +=         `<img src="${player.badges[i].icon_url}" class="badge-img">`;
+        winnerBadges +=     `</div>`;
         winnerBadges += `</div>`;
     }
     printToDom(winnerBadges, "winner-badges");
